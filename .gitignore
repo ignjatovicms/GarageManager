@@ -1,0 +1,41 @@
+## Visual Studio
+.vs/
+*.user
+*.suo
+
+## Build results
+[Bb]in/
+[Oo]bj/
+
+## User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Visual Studio Code
+.vscode/
+
+## Rider
+.idea/
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## Logs
+*.log
+
+## Test results
+TestResults/
+
+## NuGet
+*.nupkg
+*.snupkg
+
+## ASP.NET Core
+wwwroot/lib/
+
+## Local configuration / secrets
+appsettings.Local.json
