@@ -149,12 +149,11 @@ The API can be explored through Swagger.
 /api/ServiceOrders
 /api/ServiceOrders/{id}/items
 /api/ServiceOrders/statistics/{year}/{month}
+```
 Project Status
 
 Backend v1 is complete.
 
 The next phase of the project is the development of a frontend application focused on providing a simple and practical interface for everyday garage use.
-
-Built with ❤️ for garage owners and mechanics.
 
 Built with ❤️ for garage owners and mechanics.
