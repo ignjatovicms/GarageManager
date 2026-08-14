@@ -99,61 +99,62 @@ Services:
 
 Total:
 10,200 RSD
-Monthly statistics provide information such as:
+```
 
-Total orders
+## Monthly Statistics
 
-Completed orders
+The application provides monthly business statistics, including:
 
-Vehicle orders
+- Total orders
+- Completed orders
+- Vehicle orders
+- Part sales
+- Parts revenue
+- Services revenue
+- Total revenue
 
-Part sales
+## Technologies
 
-Parts revenue
+| Category | Tools / Frameworks |
+|---|---|
+| Language | C# |
+| Framework | .NET, ASP.NET Core Web API |
+| ORM | Entity Framework Core |
+| Database | SQL Server |
+| API Documentation | Swagger / OpenAPI |
+| Testing | xUnit, EF Core InMemory |
+| Version Control | Git / GitHub |
 
-Services revenue
+## Testing
 
-Total revenue
-
-Technologies
-Category	Tools / Frameworks
-Language	C#
-Framework	.NET, ASP.NET Core Web API
-ORM	Entity Framework Core
-Database	SQL Server
-API Documentation	Swagger / OpenAPI
-Testing	xUnit, EF Core InMemory
-Version Control	Git / GitHub
-Testing
 The project includes automated tests for core business logic using xUnit and EF Core InMemory.
+
 Current tests cover:
 
-Order price calculation
+- Order price calculation
+- Parts and services revenue calculation
+- Service duration calculation
+- Monthly statistics
+- Edge case when a vehicle has no departure time
 
-Parts/services revenue calculation
+## API
 
-Service duration calculation
-
-Monthly statistics
-
-Edge case when a vehicle has no departure time
-
-API
 The API can be explored through Swagger.
 
-Main resources:
+### Main Resources
 
+```text
 /api/Customers
-
 /api/Cars
-
 /api/ServiceOrders
-
 /api/ServiceOrders/{id}/items
-
+/api/ServiceOrders/statistics/{year}/{month}
 Project Status
+
 Backend v1 is complete.
 
-The next phase of the project is a frontend application focused on providing a simple and practical interface for everyday garage use.
+The next phase of the project is the development of a frontend application focused on providing a simple and practical interface for everyday garage use.
+
+Built with ❤️ for garage owners and mechanics.
 
 Built with ❤️ for garage owners and mechanics.
