@@ -15,5 +15,8 @@ namespace GarageManager.Dtos
         [Required]  
         [Range(1900, 2040)]
         public int Year { get; set; }
+
+        [Range(1, int.MaxValue)]
+        public int CustomerId { get; set; }
     }
 }

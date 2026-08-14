@@ -15,13 +15,22 @@ namespace GarageManager.Services
             _context = context;
         }
 
+
         public async Task<CarDto> Create(CreateCarDto dto)
         {
+            var customerExists = await _context.Customers
+            .AnyAsync(c => c.Id == dto.CustomerId);
+
+            if (!customerExists)
+            {
+                throw new ArgumentException("Customer does not exist.");
+            }
             var car = new Car
             {
                 Brand = dto.Brand,
                 Model = dto.Model,
-                Year = dto.Year
+                Year = dto.Year,
+                CustomerId = dto.CustomerId
             };
 
             _context.Cars.Add(car);
@@ -32,7 +41,8 @@ namespace GarageManager.Services
                 Id = car.Id,
                 Brand = car.Brand,
                 Model = car.Model,
-                Year = car.Year
+                Year = car.Year,
+                CustomerId =car.CustomerId
             };
         }
 
@@ -58,22 +68,45 @@ namespace GarageManager.Services
                     Id = c.Id,
                     Brand = c.Brand,
                     Model = c.Model,
-                    Year = c.Year
+                    Year = c.Year,
+                    CustomerId = c.CustomerId,
+
+                    Customer = new CustomerDto
+                    {
+                        Id = c.Customer.Id,
+                        FirstName = c.Customer.FirstName,
+                        LastName = c.Customer.LastName,
+                        Phone = c.Customer.Phone,
+                        Email = c.Customer.Email
+                    }
                 }).ToListAsync();
         }
 
-        public  async Task<CarDto?> GetById(int id)
+        public async Task<CarDto?> GetById(int id)
         {
-            var car =  await _context.Cars.FindAsync(id);
+            var car = await _context.Cars
+                .Include(c => c.Customer)
+                .FirstOrDefaultAsync(c => c.Id == id);
 
-            if (car == null) return null;
+            if (car == null)
+                return null;
 
             return new CarDto
             {
                 Id = car.Id,
                 Brand = car.Brand,
                 Model = car.Model,
-                Year = car.Year
+                Year = car.Year,
+                CustomerId = car.CustomerId,
+
+                Customer = new CustomerDto
+                {
+                    Id = car.Customer.Id,
+                    FirstName = car.Customer.FirstName,
+                    LastName = car.Customer.LastName,
+                    Phone = car.Customer.Phone,
+                    Email = car.Customer.Email
+                }
             };
         }
 
@@ -86,7 +119,8 @@ namespace GarageManager.Services
                     Id = c.Id,
                     Brand = c.Brand,
                     Model = c.Model,
-                    Year = c.Year
+                    Year = c.Year,
+                    CustomerId = c.CustomerId
                 })
                 .ToListAsync();
         }

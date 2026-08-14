@@ -43,7 +43,11 @@ namespace GarageManager.Controllers
         public async Task<IActionResult> Create(CreateCarDto dto)
         {
             var result = await _carService.Create(dto);
-            return Ok(result);
+
+            return CreatedAtAction(
+                    nameof(GetById),
+                    new { id = result.Id },
+                    result);
         }
 
         [HttpDelete("{id}")]

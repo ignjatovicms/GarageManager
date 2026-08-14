@@ -1,4 +1,5 @@
 <Solution>
   <Folder Name="/Solution Items/" />
+  <Project Path="GarageManager.Tests/GarageManager.Tests.csproj" Id="a5d612ae-b24a-4442-9593-9773cba3b7ce" />
   <Project Path="GarageManager/GarageManager.csproj" />
 </Solution>

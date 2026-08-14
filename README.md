@@ -1,79 +1,159 @@
 # GarageManager
 
-GarageManager is a RESTful Web API for managing garage operations, built with ASP.NET Core and C#.
+GarageManager is a backend application for managing automotive repair shop operations.
 
-The project is being developed as a personal portfolio project to practice building a layered .NET application, working with relational databases, and designing REST APIs.
+The project was designed around real‑world garage workflows such as customers, vehicles, service orders, parts, services, pricing, warranties and monthly business statistics.
 
-## Technologies
+---
 
-- C#
-- ASP.NET Core Web API
-- Entity Framework Core
-- SQL Server
-- REST API
-- Swagger / OpenAPI
-- Docker
-- Git / GitHub
+## Features
+
+- Customer management  
+- Vehicle management  
+- Service order management  
+- Parts and services within service orders  
+- Manual pricing for parts and services  
+- Quantity and units (piece, liter, hour, service)  
+- Warranty tracking  
+- Vehicle mileage tracking  
+- Vehicle condition and notes  
+- Arrival and departure time tracking  
+- Automatic service duration calculation  
+- Automatic parts, services and total price calculation  
+- Monthly revenue and order statistics  
+- Optional customer and vehicle for orders  
+- Part sales without vehicle service  
+- REST API with Swagger documentation  
+- Validation and HTTP error handling  
+- Automated tests for core business logic  
+
+---
 
 ## Architecture
 
-The application follows a layered structure that separates HTTP request handling, business logic, and data access.
+The application follows a layered structure:
+
+- **Controllers** – handle HTTP requests and responses  
+- **Services** – contain business logic  
+- **DTOs** – control data exchanged through the API  
+- **Models** – represent domain entities  
+- **DbContext** – handles database access through Entity Framework Core  
+- **Enums** – define order types, item types, units and statuses  
+
+---
+
+## Main Entities
+
+### Customer
+Represents a garage customer and can have multiple vehicles and service orders.
+
+### Car
+Represents a vehicle belonging to a customer.
+
+### ServiceOrder
+Represents a visit/order in the garage.  
+An order can contain:
+
+- Customer  
+- Vehicle  
+- Mileage  
+- Vehicle condition  
+- Arrival/departure time  
+- Notes  
+- Parts  
+- Services  
+- Order status  
+
+### ServiceOrderItem
+Represents either a part or a service.  
+Examples:
+
+- Motul 5W‑30 engine oil  
+- Brembo brake disc  
+- Mann oil filter  
+- Oil change  
+- Polishing  
+
+Each item supports quantity, unit price, warranty information and notes.
+
+---
+
+## Business Logic
+
+The application calculates:
+
+- Parts total  
+- Services total  
+- Total order price  
+- Vehicle stay duration  
+
+Example:
 
 ```text
-Client
-   ↓
-Controller
-   ↓
-Service
-   ↓
-Entity Framework Core
-   ↓
-SQL Server
-```
+Parts:
+5 × 1,500 RSD = 7,500 RSD
+1 × 1,200 RSD = 1,200 RSD
 
+Services:
+1 × 1,500 RSD = 1,500 RSD
 
-- **Controller** – handles HTTP requests and responses
-- **Service** – contains business logic, decoupled via `ICarService`
-- **DTOs** – shape data exchanged with the client, separate from the database entities
-- **EF Core** – handles data persistence and migrations
+Total:
+10,200 RSD
+Monthly statistics provide information such as:
 
-## Endpoints
+Total orders
 
-| Method | Route              | Description                  |
-|--------|---------------------|-------------------------------|
-| GET    | `/api/cars`          | Get all cars                  |
-| GET    | `/api/cars/{id}`     | Get a car by ID               |
-| GET    | `/api/cars/search`   | Search cars by brand/model    |
-| POST   | `/api/cars`          | Create a new car              |
-| PUT    | `/api/cars/{id}`     | Update an existing car        |
-| DELETE | `/api/cars/{id}`     | Delete a car                  |
+Completed orders
 
-## Getting Started
+Vehicle orders
 
-### Prerequisites
+Part sales
 
-- [.NET SDK](https://dotnet.microsoft.com/download)
-- SQL Server (LocalDB or full instance)
+Parts revenue
 
-### Setup
+Services revenue
 
-```bash
-# Clone the repository
-git clone https://github.com/ignjatovicms/GarageManager.git
-cd GarageManager
+Total revenue
 
-# Update the connection string in appsettings.json to match your SQL Server instance
+Technologies
+Category	Tools / Frameworks
+Language	C#
+Framework	.NET, ASP.NET Core Web API
+ORM	Entity Framework Core
+Database	SQL Server
+API Documentation	Swagger / OpenAPI
+Testing	xUnit, EF Core InMemory
+Version Control	Git / GitHub
+Testing
+The project includes automated tests for core business logic using xUnit and EF Core InMemory.
+Current tests cover:
 
-# Apply migrations
-dotnet ef database update
+Order price calculation
 
-# Run the application
-dotnet run
-```
+Parts/services revenue calculation
 
-The API will be available at `https://localhost:5162/swagger` for interactive documentation
-(port may differ depending on your local configuration — check the console output when running `dotnet run`).
+Service duration calculation
 
-## Status
+Monthly statistics
 
-🚧 Work in progress — this project is under active development as part of my portfolio.
+Edge case when a vehicle has no departure time
+
+API
+The API can be explored through Swagger.
+
+Main resources:
+
+/api/Customers
+
+/api/Cars
+
+/api/ServiceOrders
+
+/api/ServiceOrders/{id}/items
+
+Project Status
+Backend v1 is complete.
+
+The next phase of the project is a frontend application focused on providing a simple and practical interface for everyday garage use.
+
+Built with ❤️ for garage owners and mechanics.

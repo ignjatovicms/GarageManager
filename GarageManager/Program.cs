@@ -10,12 +10,19 @@ namespace GarageManager
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(
+                new System.Text.Json.Serialization.JsonStringEnumConverter());
+            });
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer
             (builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddScoped<ICarService, CarService>();
+            builder.Services.AddScoped<ICustomerService, CustomerService>();
+            builder.Services.AddScoped<ServiceOrderService>();
+            builder.Services.AddScoped<ServiceOrderItemService>();
 
             var app = builder.Build();
 
