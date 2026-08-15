@@ -42,6 +42,12 @@ The application follows a layered structure:
 
 ---
 
+## Live Demo
+
+Explore the deployed API through Swagger:
+
+**[Open Swagger UI](http://garagemanager.runasp.net/swagger)**
+
 ## Main Entities
 
 ### Customer
